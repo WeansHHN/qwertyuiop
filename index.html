@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vượt Link - Anime Style</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212;
+            background-image: url('https://example.com/anime-background.jpg'); /* Thay đổi với URL hình nền của bạn */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #fff;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+        }
+
+        #countdown {
+            font-size: 4rem;
+            margin-top: 20px;
+            color: #fff; /* Đổi màu chữ countdown */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background-color: #8b8b8b;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            transition: background-color 0.3s ease;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        button:hover {
+            background-color: #8b8b8b;
+        }
+
+        #download-button {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #adblock-message {
+            display: none;
+            font-size: 1.2rem;
+            color: red;
+            margin-top: 20px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #fff; /* Đổi màu chữ tiêu đề */
+            text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.7);
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        button {
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .container {
+            animation: fadeIn 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Liên Quân Mobile</h1>
+        <button id="start-button">Vượt Link</button>
+        <div id="countdown" style="display: none;">20</div>
+        <center>
+        <button id="download-button">Tải Về</button>
+        </center>
+        <div id="adblock-message">Vui lòng tắt trình chặn quảng cáo để tiếp tục.</div>
+    </div>
+    <script>
+        // Mảng các liên kết liên kết liên kết
+        const affiliateLinks = [
+            'https://shope.ee/1qGD7bsowo',
+            'https://s.shopee.vn/40KhhbxR7E',
+            'https://s.shopee.vn/3fhrJ2O5c0'
+        ];
+
+        document.getElementById('start-button').addEventListener('click', function() {
+            if (detectAdBlock()) {
+                document.getElementById('adblock-message').style.display = 'block';
+                return;
+            }
+
+            // Mở mỗi liên kết liên kết trong tab mới
+            affiliateLinks.forEach(link => {
+                window.open(link, '_blank');
+            });
+            
+            this.style.display = 'none';
+            let countdownElement = document.getElementById('countdown');
+            countdownElement.style.display = 'block';
+
+            let countdownTime = 20;
+
+            function updateCountdown() {
+                countdownElement.textContent = countdownTime;
+                if (countdownTime > 0) {
+                    countdownTime--;
+                } else {
+                    // Hiển thị nút tải về sau khi đếm ngược đạt đến không
+                    countdownElement.style.display = 'none';
+                    document.getElementById('download-button').style.display = 'block';
+                }
+            }
+
+            // Cập nhật đếm ngược mỗi giây
+            setInterval(updateCountdown, 1000);
+        });
+
+        document.getElementById('download-button').addEventListener('click', function() {
+            // Chuyển hướng đến liên kết tải về
+            window.location.href = 'https://download-link.com'; // Thay đổi với URL tải về của bạn
+        });
+
+        function detectAdBlock() {
+            let adBlockEnabled = false;
+            const ad = document.createElement('div');
+            ad.innerHTML = '&nbsp;';
+            ad.className = 'adsbox';
+            document.body.appendChild(ad);
+            if (ad.offsetHeight === 0) {
+                adBlockEnabled = true;
+            }
+            document.body.removeChild(ad);
+            return adBlockEnabled;
+        }
+    </script>
+</body>
+</html>
